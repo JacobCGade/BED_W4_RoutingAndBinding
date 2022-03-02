@@ -9,15 +9,15 @@ namespace BED_W4_Exercise.Pages.Contact
     public class DetailsModel : PageModel
     {
         [BindProperty]
-        public InputModel? Input { get; set;} = null;
-        public StoreContactInfo Service {get; set; }
+        public InputModel Input { get; set; }
+        private StoreContactInfo _service; 
         public DetailsModel(StoreContactInfo service) {
-            Service = service;
+            _service = service;
         }
         public void OnGet(int index) 
         {
-            if(index < Service.Contacts.Count) {
-                var contact = Service.Contacts[index];
+            if(index < _service.Contacts.Count) {
+                var contact = _service.Contacts[index];
                 Input = new InputModel {
                     Email = contact.Email,
                     Name = contact.Name,
@@ -27,11 +27,13 @@ namespace BED_W4_Exercise.Pages.Contact
         }
         public class InputModel {
             [Required]
-            public String? Email { get; set; } 
+            [EmailAddress]
+            public String Email { get; set; } 
             [Required]
-            public String? Name { get; set; }
+            public String Name { get; set; }
             [Required]
-            public String? PhoneNumber { get; set; }
+            [Phone]
+            public String PhoneNumber { get; set; }
         }
     }
 }

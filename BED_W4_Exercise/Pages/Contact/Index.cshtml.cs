@@ -27,11 +27,10 @@ namespace BED_W4_Exercise.Pages.Contact
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return Page();
+                Service.Contacts.Add(ContactModel);
             }
-            Service.Contacts.Add(ContactModel);
             return Page();
         }
     }
