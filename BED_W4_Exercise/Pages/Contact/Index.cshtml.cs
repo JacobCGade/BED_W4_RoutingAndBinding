@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 using BED_W4_Exercise.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,13 +9,14 @@ namespace BED_W4_Exercise.Pages.Contact
     public class IndexModel : PageModel
     {
         [BindProperty]
-        public Models.Contact ContactModel { get; set; }
+        public InputModel Input { get; set; }
 
         public StoreContactInfo Service { get; set; }
 
         public IndexModel(StoreContactInfo service)
         {
             Service = service;
+            Input = new InputModel {};
         }
 
         public void OnGet()
@@ -27,11 +30,28 @@ namespace BED_W4_Exercise.Pages.Contact
 
         public IActionResult OnPost()
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                Service.Contacts.Add(ContactModel);
+               return Page();
             }
-            return Page();
+            Service.Contacts.Add(new Models.Contact {
+                Email = Input.Email,
+                Name = Input.Name,
+                PhoneNumber = Input.PhoneNumber
+            });
+            return RedirectToPage("Index");
         }
     }
+
+
+        public class InputModel {
+            [Required]
+            [EmailAddress]
+            public String Email { get; set; } = "";
+            [Required]
+            public String Name { get; set; } = "";
+            [Required]
+            [Phone]
+            public String PhoneNumber { get; set; } = "";
+        }
 }

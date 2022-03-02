@@ -9,7 +9,7 @@ namespace BED_W4_Exercise.Pages.Contact
     public class DetailsModel : PageModel
     {
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel? Input { get; set; } = null;
         private StoreContactInfo _service; 
         public DetailsModel(StoreContactInfo service) {
             _service = service;
@@ -28,12 +28,12 @@ namespace BED_W4_Exercise.Pages.Contact
         public class InputModel {
             [Required]
             [EmailAddress]
-            public String Email { get; set; } 
+            public String? Email { get; set; }
             [Required]
-            public String Name { get; set; }
+            public String? Name { get; set; }
             [Required]
             [Phone]
-            public String PhoneNumber { get; set; }
+            public String? PhoneNumber { get; set; }
         }
     }
 }

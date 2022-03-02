@@ -10,10 +10,10 @@
         Contact not found
     </div>
 } else {
-    <h3>@Model.Input.Email</h3>
+    <h3>@Model.Input.Email?</h3>
     <ul>
-        <li>@Model.Input.Email</li>
-        <li>@Model.Input.Name</li>
-        <li>@Model.Input.PhoneNumber</li>
+        <li>@Model.Input?.Email?</li>
+        <li>@Model.Input?.Name?</li>
+        <li>@Model.Input?.PhoneNumber?</li>
     </ul>
 }
