@@ -21,6 +21,10 @@ namespace BED_W4_Exercise.Pages.Contact
 
         }
 
+        public IActionResult OnGetDetails(string contact) {
+            return RedirectToPage("/Contact/Details", new { Contact = contact });
+        }
+
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
